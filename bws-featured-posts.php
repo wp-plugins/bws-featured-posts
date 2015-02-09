@@ -4,7 +4,7 @@ Plugin Name: Featured Posts by BestWebSoft
 Plugin URI: http://bestwebsoft.com/plugin/
 Description: Displays featured posts randomly on any website page.
 Author: BestWebSoft
-Version: 0.1
+Version: 0.2
 Author URI: http://bestwebsoft.com/
 License: GPLv3 or later
 */
@@ -338,6 +338,7 @@ if ( ! function_exists( 'ftrdpsts_display_block' ) ) {
 if ( ! function_exists( 'ftrdpsts_get_the_excerpt' ) ) {
 	function ftrdpsts_get_the_excerpt( $content ) {
 		$charlength = 100;
+		$content = wp_strip_all_tags( $content );
 		if ( strlen( $content ) > $charlength ) {
 			$subex = substr( $content, 0, $charlength-5 );
 			$exwords = explode( " ", $subex );
@@ -375,7 +376,7 @@ if ( ! function_exists( 'ftrdpsts_featured_posts' ) ) {
 					<h2>
 						<a href="' . get_permalink( $post->ID ) . '">' . get_the_title( $post->ID ) . '</a>
 					</h2>' . 
-					ftrdpsts_get_the_excerpt( $post->post_content ) .
+					'<p>' . ftrdpsts_get_the_excerpt( $post->post_content ) . '</p>' . 
 					'<a href="' . get_permalink( $post->ID ) . '" class="more">' . __( 'Learn more', 'featured_posts' ) . '</a>
 				</div><!-- .widget_content -->
 			</div><!-- .ftrdpsts_heading_featured_post -->';

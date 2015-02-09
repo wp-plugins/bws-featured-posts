@@ -4,13 +4,16 @@ Donate link: https://www.2checkout.com/checkout/purchase?sid=1430388&quantity=1&
 Tags: plugin, wordpress, featured, random posts, featured posts, add featured posts, display featured posts, manage featured posts, featured posts plugin, mark post as featured, mark page as featured, featured posts block, fetured post, faetured post, featyred post, feachured post, featured psot, featured post with theme, feetured posts, featered post. 
 Requires at least: 3.5
 Tested up to: 4.1
-Stable tag: 0.1
+Stable tag: 0.2
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 Displays featured posts randomly on any website page.
 
 == Description ==
+
+Note: This is a public beta version, which contains basic product options. You are welcome to suggest new features and usability improvements.
+<a href="http://support.bestwebsoft.com/hc/en-us/requests/new">I would like to submit a new feature.</a>
 
 Featured Posts by BestWebSoft plugin allows you to add and manage featured posts on your website. With this timesaver plugin, marking posts as featured posts, as well as displaying them on your blog pages will be a lot easier. 
 
@@ -85,18 +88,24 @@ Please make sure that the problem hasn't been discussed on our forum yet (<a hre
 
 == Screenshots ==
 
-1. Defualt Featured Posts settings.
+1. Default Featured Posts settings.
 2. Custom Featured Posts settings.
 3. Featured Posts block display with Custom plugin settings (BWS theme).
 3. Featured Posts block display with Custom plugin settings (default theme).
 
 == Changelog == 
 
-= V0.1  - 26.01.2015 = 
+= V0.2 - 09.02.2015 = 
+* Bugfix : Content display was fixed.
+
+= V0.1 - 26.01.2015 = 
 * Bugfix : The code refactoring was performed.
 * NEW : Css-style was added.
 
 == Upgrade Notice ==
+
+= V0.2 = 
+Content display was fixed.
 
 = V0.1 =
 The code refactoring. Css-style was added.
