@@ -4,7 +4,7 @@ Plugin Name: Featured Posts by BestWebSoft
 Plugin URI: http://bestwebsoft.com/plugin/
 Description: Displays featured posts randomly on any website page.
 Author: BestWebSoft
-Version: 0.2
+Version: 0.3
 Author URI: http://bestwebsoft.com/
 License: GPLv3 or later
 */
@@ -26,72 +26,33 @@ License: GPLv3 or later
 */
 
 /**
-	* Add option page in admin menu 
-	*/
+* Add option page in admin menu 
+*/
 if ( ! function_exists( 'ftrdpsts_admin_menu' ) ) {
 	function ftrdpsts_admin_menu() {
-		global $bstwbsftwppdtplgns_options, $bstwbsftwppdtplgns_added_menu;
-		$bws_menu_info = get_plugin_data( plugin_dir_path( __FILE__ ) . "bws_menu/bws_menu.php" );
-		$bws_menu_version = $bws_menu_info["Version"];
-		$base = plugin_basename( __FILE__ );
-
-		if ( ! isset( $bstwbsftwppdtplgns_options ) ) {
-			if ( is_multisite() ) {
-				if ( ! get_site_option( 'bstwbsftwppdtplgns_options' ) )
-					add_site_option( 'bstwbsftwppdtplgns_options', array(), '', 'yes' );
-				$bstwbsftwppdtplgns_options = get_site_option( 'bstwbsftwppdtplgns_options' );
-			} else {
-				if ( ! get_option( 'bstwbsftwppdtplgns_options' ) )
-					add_option( 'bstwbsftwppdtplgns_options', array(), '', 'yes' );
-				$bstwbsftwppdtplgns_options = get_option( 'bstwbsftwppdtplgns_options' );
-			}
-		}
-
-		if ( isset( $bstwbsftwppdtplgns_options['bws_menu_version'] ) ) {
-			$bstwbsftwppdtplgns_options['bws_menu']['version'][ $base ] = $bws_menu_version;
-			unset( $bstwbsftwppdtplgns_options['bws_menu_version'] );
-			if ( is_multisite() )
-				update_site_option( 'bstwbsftwppdtplgns_options', $bstwbsftwppdtplgns_options, '', 'yes' );
-			else
-				update_option( 'bstwbsftwppdtplgns_options', $bstwbsftwppdtplgns_options, '', 'yes' );
-			require_once( dirname( __FILE__ ) . '/bws_menu/bws_menu.php' );
-		} else if ( ! isset( $bstwbsftwppdtplgns_options['bws_menu']['version'][ $base ] ) || $bstwbsftwppdtplgns_options['bws_menu']['version'][ $base ] < $bws_menu_version ) {
-			$bstwbsftwppdtplgns_options['bws_menu']['version'][ $base ] = $bws_menu_version;
-			if ( is_multisite() )
-				update_site_option( 'bstwbsftwppdtplgns_options', $bstwbsftwppdtplgns_options, '', 'yes' );
-			else
-				update_option( 'bstwbsftwppdtplgns_options', $bstwbsftwppdtplgns_options, '', 'yes' );
-			require_once( dirname( __FILE__ ) . '/bws_menu/bws_menu.php' );
-		} else if ( ! isset( $bstwbsftwppdtplgns_added_menu ) ) {
-			$plugin_with_newer_menu = $base;
-			foreach ( $bstwbsftwppdtplgns_options['bws_menu']['version'] as $key => $value ) {
-				if ( $bws_menu_version < $value && is_plugin_active( $base ) ) {
-					$plugin_with_newer_menu = $key;
-				}
-			}
-			$plugin_with_newer_menu = explode( '/', $plugin_with_newer_menu );
-			$wp_content_dir = defined( 'WP_CONTENT_DIR' ) ? basename( WP_CONTENT_DIR ) : 'wp-content';
-			if ( file_exists( ABSPATH . $wp_content_dir . '/plugins/' . $plugin_with_newer_menu[0] . '/bws_menu/bws_menu.php' ) )
-				require_once( ABSPATH . $wp_content_dir . '/plugins/' . $plugin_with_newer_menu[0] . '/bws_menu/bws_menu.php' );
-			else
-				require_once( dirname( __FILE__ ) . '/bws_menu/bws_menu.php' );	
-			$bstwbsftwppdtplgns_added_menu = true;			
-		}
-
-		add_menu_page( 'BWS Plugins', 'BWS Plugins', 'manage_options', 'bws_plugins', 'bws_add_menu_render', plugins_url( "images/px.png", __FILE__ ), 1001 );
+		bws_add_general_menu( plugin_basename( __FILE__ ) );
 		add_submenu_page( 'bws_plugins', __( 'Featured Posts Settings', 'featured_posts' ), __( 'Featured Posts', 'featured_posts' ), 'manage_options', 'featured-posts.php', 'ftrdpsts_settings_page' );
 	}
 }
 
 /**
-	* Plugin initialization
-	*/
+* Plugin initialization
+*/
 if ( ! function_exists( 'ftrdpsts_init' ) ) {
 	function ftrdpsts_init() {
+		global $ftrdpsts_plugin_info;
 		load_plugin_textdomain( 'featured_posts', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' ); 
 
-		/* Function check if plugin is compatible with current WP version  */
-		ftrdpsts_version_check();
+		require_once( dirname( __FILE__ ) . '/bws_menu/bws_functions.php' );
+
+		if ( empty( $ftrdpsts_plugin_info ) ) {
+			if ( ! function_exists( 'get_plugin_data' ) )
+				require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+			$ftrdpsts_plugin_info = get_plugin_data( __FILE__ );
+		}
+
+		/* Function check if plugin is compatible with current WP version */
+		bws_wp_version_check( plugin_basename( __FILE__ ), $ftrdpsts_plugin_info, "3.5" );
 	}
 }
 
@@ -99,9 +60,6 @@ if ( ! function_exists( 'ftrdpsts_admin_init' ) ) {
 	function ftrdpsts_admin_init() {
 		global $bws_plugin_info, $ftrdpsts_plugin_info;
 		/* Add variable for bws_menu */
-		if ( ! $ftrdpsts_plugin_info )
-			$ftrdpsts_plugin_info = get_plugin_data( __FILE__ );
-
 		if ( ! isset( $bws_plugin_info ) || empty( $bws_plugin_info ) )
 			$bws_plugin_info = array( 'id' => '179', 'version' => $ftrdpsts_plugin_info["Version"] );
 
@@ -117,9 +75,6 @@ if ( ! function_exists( 'ftrdpsts_admin_init' ) ) {
 if ( ! function_exists( 'ftrdpsts_settings' ) ) {
 	function ftrdpsts_settings() {
 		global $ftrdpsts_options, $ftrdpsts_plugin_info;
-
-		if ( ! $ftrdpsts_plugin_info )
-			$ftrdpsts_plugin_info = get_plugin_data( __FILE__ );
 
 		$ftrdpsts_option_defaults = array(
 			'plugin_option_version' 	=> $ftrdpsts_plugin_info["Version"],
@@ -150,32 +105,11 @@ if ( ! function_exists( 'ftrdpsts_settings' ) ) {
 }
 
 /**
-	* Function check if plugin is compatible with current WP version 
-	*/
-if ( ! function_exists( 'ftrdpsts_version_check' ) ) {
-	function ftrdpsts_version_check() {
-		global $wp_version, $ftrdpsts_plugin_info;
-		$require_wp		=	"3.5"; /* Wordpress at least requires version */
-		$plugin			=	plugin_basename( __FILE__ );
-	 	if ( version_compare( $wp_version, $require_wp, "<" ) ) {
-	 		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-			if ( is_plugin_active( $plugin ) ) {
-				deactivate_plugins( $plugin );
-				if ( ! $ftrdpsts_plugin_info )
-					$ftrdpsts_plugin_info = get_plugin_data( __FILE__ );
-				$admin_url = ( function_exists( 'get_admin_url' ) ) ? get_admin_url( null, 'plugins.php' ) : esc_url( '/wp-admin/plugins.php' );
-				wp_die( "<strong>" . $ftrdpsts_plugin_info['Name'] . " </strong> " . __( 'requires', 'featured_posts' ) . " <strong>WordPress " . $require_wp . "</strong> " . __( 'or higher, that is why it has been deactivated! Please upgrade WordPress and try again.', 'featured_posts') . "<br /><br />" . __( 'Back to the WordPress', 'featured_posts') . " <a href='" . $admin_url . "'>" . __( 'Plugins page', 'featured_posts') . "</a>." );
-			}
-		}
-	}
-}
-
-/**
 	* Add settings page in admin area
 	*/
 if ( ! function_exists( 'ftrdpsts_settings_page' ) ) {
 	function ftrdpsts_settings_page(){ 
-		global $title, $ftrdpsts_options;
+		global $title, $ftrdpsts_options, $ftrdpsts_plugin_info;
 		$message = $error = ''; 
 		
 		if ( isset( $_POST['ftrdpsts_form_submit'] ) && check_admin_referer( plugin_basename( __FILE__ ), 'ftrdpsts_check_field' ) ) {
@@ -293,16 +227,7 @@ if ( ! function_exists( 'ftrdpsts_settings_page' ) ) {
 					<?php wp_nonce_field( plugin_basename( __FILE__ ), 'ftrdpsts_check_field' ) ?>
 				</p>
 			</form>
-			<div class="bws-plugin-reviews">
-				<div class="bws-plugin-reviews-rate">
-					<?php _e( 'If you enjoy our plugin, please give it 5 stars on WordPress', 'featured_posts' ); ?>:
-					<a href="http://wordpress.org/support/view/plugin-reviews/featured-posts/" target="_blank" title="Featured Posts reviews"><?php _e( 'Rate the plugin', 'featured_posts' ); ?></a><br/>
-				</div>
-				<div class="bws-plugin-reviews-support">
-					<?php _e( 'If there is something wrong about it, please contact us', 'featured_posts' ); ?>:
-					<a href="http://support.bestwebsoft.com">http://support.bestwebsoft.com</a>
-				</div>
-			</div>
+			<?php bws_plugin_reviews_block( $ftrdpsts_plugin_info['Name'], 'bws-featured-posts' ); ?>
 		</div>
 	<?php }
 }
@@ -514,14 +439,16 @@ if ( ! function_exists( 'ftrdpsts_admin_head' ) ) {
  */
 if ( ! function_exists( 'ftrdpsts_plugin_action_links' ) ) {
 	function ftrdpsts_plugin_action_links( $links, $file ) {
-		/* Static so we don't call plugin_basename on every plugin row. */
-		static $this_plugin;
-		if ( ! $this_plugin )
-			$this_plugin = plugin_basename(__FILE__);
+		if ( ! is_network_admin() ) {
+			/* Static so we don't call plugin_basename on every plugin row. */
+			static $this_plugin;
+			if ( ! $this_plugin )
+				$this_plugin = plugin_basename(__FILE__);
 
-		if ( $file == $this_plugin ) {
-			$settings_link = '<a href="admin.php?page=featured-posts.php">' . __( 'Settings', 'featured_posts' ) . '</a>';
-			array_unshift( $links, $settings_link );
+			if ( $file == $this_plugin ) {
+				$settings_link = '<a href="admin.php?page=featured-posts.php">' . __( 'Settings', 'featured_posts' ) . '</a>';
+				array_unshift( $links, $settings_link );
+			}
 		}
 		return $links;
 	}
@@ -534,7 +461,8 @@ if ( ! function_exists( 'ftrdpsts_register_plugin_links' ) ) {
 	function ftrdpsts_register_plugin_links( $links, $file ) {
 		$base = plugin_basename(__FILE__);
 		if ( $file == $base ) {
-			$links[] = '<a href="admin.php?page=featured-posts.php">' . __( 'Settings','featured_posts' ) . '</a>';
+			if ( ! is_network_admin() )
+				$links[] = '<a href="admin.php?page=featured-posts.php">' . __( 'Settings','featured_posts' ) . '</a>';
 			$links[] = '<a href="http://wordpress.org/plugins/bws-featured-posts/faq/" target="_blank">' . __( 'FAQ','featured_posts' ) . '</a>';
 			$links[] = '<a href="http://support.bestwebsoft.com">' . __( 'Support','featured_posts' ) . '</a>';
 		}

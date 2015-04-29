@@ -3,8 +3,8 @@ Contributors: bestwebsoft
 Donate link: https://www.2checkout.com/checkout/purchase?sid=1430388&quantity=1&product_id=94
 Tags: plugin, wordpress, featured, random posts, featured posts, add featured posts, display featured posts, manage featured posts, featured posts plugin, mark post as featured, mark page as featured, featured posts block, fetured post, faetured post, featyred post, feachured post, featured psot, featured post with theme, feetured posts, featered post. 
 Requires at least: 3.5
-Tested up to: 4.1
-Stable tag: 0.2
+Tested up to: 4.2.1
+Stable tag: 0.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -16,6 +16,8 @@ Note: This is a public beta version, which contains basic product options. You a
 <a href="http://support.bestwebsoft.com/hc/en-us/requests/new">I would like to submit a new feature.</a>
 
 Featured Posts by BestWebSoft plugin allows you to add and manage featured posts on your website. With this timesaver plugin, marking posts as featured posts, as well as displaying them on your blog pages will be a lot easier. 
+
+http://www.youtube.com/watch?v=7Z5d1qZpwrM
 
 <a href="http://wordpress.org/plugins/bws-featured-posts/faq/" target="_blank">FAQ</a>
 <a href="http://support.bestwebsoft.com" target="_blank">Support</a>
@@ -56,6 +58,8 @@ We can fix some things for free for the users who provide a translation of our p
 2. Activate the plugin using the 'Plugins' menu in your WordPress admin panel.
 3. You can adjust the necessary settings using your WordPress admin panel in "BWS Plugins" > "Featured Posts".
 
+<a href="https://docs.google.com/document/d/1-Z1wIAaRuewPjc4TpAxpd5jZajdubj-v98NZ2cvXgkw/edit" target="_blank">View a Step-by-step Instruction on Multilanguage Installation</a>.
+
 == Frequently Asked Questions ==
 
 = How can I add a Featured Post to my website? =
@@ -95,7 +99,10 @@ Please make sure that the problem hasn't been discussed on our forum yet (<a hre
 
 == Changelog == 
 
-= V0.2 - 09.02.2015 = 
+= V0.3 - 29.04.2015 =
+* Update : We updated all functionality for wordpress 4.2.1.
+
+= V0.2 - 09.02.2015 =
 * Bugfix : Content display was fixed.
 
 = V0.1 - 26.01.2015 = 
@@ -103,6 +110,9 @@ Please make sure that the problem hasn't been discussed on our forum yet (<a hre
 * NEW : Css-style was added.
 
 == Upgrade Notice ==
+
+= V0.3 =
+We updated all functionality for wordpress 4.2.1.
 
 = V0.2 = 
 Content display was fixed.
