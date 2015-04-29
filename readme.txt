@@ -58,7 +58,7 @@ We can fix some things for free for the users who provide a translation of our p
 2. Activate the plugin using the 'Plugins' menu in your WordPress admin panel.
 3. You can adjust the necessary settings using your WordPress admin panel in "BWS Plugins" > "Featured Posts".
 
-<a href="https://docs.google.com/document/d/1-Z1wIAaRuewPjc4TpAxpd5jZajdubj-v98NZ2cvXgkw/edit" target="_blank">View a Step-by-step Instruction on Multilanguage Installation</a>.
+<a href="https://docs.google.com/document/d/1-Z1wIAaRuewPjc4TpAxpd5jZajdubj-v98NZ2cvXgkw/edit" target="_blank">View a Step-by-step Instruction on Featured Posts Installation</a>.
 
 == Frequently Asked Questions ==
 
