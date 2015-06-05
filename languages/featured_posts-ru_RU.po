@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Featured Posts\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-05 10:25+0300\n"
-"PO-Revision-Date: 2015-02-05 10:26+0300\n"
+"POT-Creation-Date: 2015-06-05 10:00+0300\n"
+"PO-Revision-Date: 2015-06-05 10:01+0300\n"
 "Last-Translator: bestwebsoft.com <plugins@bestwebsoft.com>\n"
 "Language-Team: bestwebsoft.com <plugin@bestwebsoft.com>\n"
 "Language: ru_RU\n"
@@ -16,149 +16,156 @@ msgstr ""
 "X-Generator: Poedit 1.5.7\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: bws-featured-posts.php:82
+#: bws-featured-posts.php:34
 msgid "Featured Posts Settings"
 msgstr "Настройки Featured Posts"
 
-#: bws-featured-posts.php:82
+#: bws-featured-posts.php:34
 msgid "Featured Posts"
 msgstr "Избранные посты"
 
-#: bws-featured-posts.php:167
-msgid "requires"
-msgstr "требует"
+#: bws-featured-posts.php:122
+msgid "Invalid value for 'Block width'"
+msgstr "Неверное значение для опции 'Ширина блока'"
 
-#: bws-featured-posts.php:167
-msgid "or higher, that is why it has been deactivated! Please upgrade WordPress and try again."
-msgstr "или выше, поэтому плагин был деактивирован! Пожалуйста обновите WordPress и попробуйте снова."
+#: bws-featured-posts.php:128
+msgid "Invalid value for 'Content block width'"
+msgstr "Неверное значение для опции 'Ширина блока контента'"
 
-#: bws-featured-posts.php:167
-msgid "Back to the WordPress"
-msgstr "Вернуться к WordPress"
-
-#: bws-featured-posts.php:167
-msgid "Plugins page"
-msgstr "Страница плагинов"
-
-#: bws-featured-posts.php:194
+#: bws-featured-posts.php:138
 msgid "Changes saved"
 msgstr "Изменения сохранены"
 
-#: bws-featured-posts.php:201
-#: bws-featured-posts.php:522
-#: bws-featured-posts.php:536
+#: bws-featured-posts.php:145
+#: bws-featured-posts.php:463
+#: bws-featured-posts.php:479
 msgid "Settings"
 msgstr "Настройки"
 
-#: bws-featured-posts.php:202
-#: bws-featured-posts.php:537
+#: bws-featured-posts.php:146
+#: bws-featured-posts.php:480
 msgid "FAQ"
 msgstr "FAQ"
 
-#: bws-featured-posts.php:204
+#: bws-featured-posts.php:148
 msgid "Notice:"
 msgstr "Обратите внимание:"
 
-#: bws-featured-posts.php:204
+#: bws-featured-posts.php:148
 msgid "The plugin's settings have been changed. In order to save them please don't forget to click the 'Save Changes' button."
 msgstr "Настройки плагина были изменены. Чтобы сохранить их, пожалуйста, не забудьте нажать кнопку 'Сохранить изменения'."
 
-#: bws-featured-posts.php:207
+#: bws-featured-posts.php:151
 msgid "If you would like to add Featured Posts to your page or post, select posts to be displayed (on the page/post editing page, in Featured Post block, please mark 'Display this post in the Featured Post block?')."
 msgstr "Если вы хотите добавить избранные посты на свою страницу или в пост, выберите посты, которые будут отображаться (на странице редактирования поста или страницы, в блоке \"Избранный пост\" отметьте \"Отображать данный пост в блоке с избранными постами?\")."
 
-#: bws-featured-posts.php:209
+#: bws-featured-posts.php:153
 msgid "If you would like to add Featured Posts to your website, just copy and paste this shortcode into your post or page:"
 msgstr "Если вы хотите добавить Featured Posts на свой сайт, вам нужно скопировать и вставить шорткод в контент страницы или поста:"
 
-#: bws-featured-posts.php:212
+#: bws-featured-posts.php:156
 msgid "Also, you can paste the following strings into the template source code"
 msgstr "Также, вы можете вставить следующие строки в исходный код шаблона"
 
-#: bws-featured-posts.php:223
+#: bws-featured-posts.php:167
 msgid "Display the block with Featured Posts"
 msgstr "Отображать блок с Избранными постами"
 
-#: bws-featured-posts.php:227
+#: bws-featured-posts.php:171
 msgid "Before the Post"
 msgstr "Перед постом"
 
-#: bws-featured-posts.php:231
+#: bws-featured-posts.php:175
 msgid "After the Post"
 msgstr "После поста"
 
-#: bws-featured-posts.php:236
+#: bws-featured-posts.php:180
 msgid "Block width"
 msgstr "Ширина блока"
 
-#: bws-featured-posts.php:239
-#: bws-featured-posts.php:246
+#: bws-featured-posts.php:183
+#: bws-featured-posts.php:190
 msgid "Please, enter the value in &#37; or px, for instance, 100&#37; or 960px"
 msgstr "Пожалуйста, введите значение в &#37; или пикселях, например 100&#37; или 960px"
 
-#: bws-featured-posts.php:243
+#: bws-featured-posts.php:187
 msgid "Content block width"
 msgstr "Ширина блока контента"
 
-#: bws-featured-posts.php:250
+#: bws-featured-posts.php:194
 msgid "Style"
 msgstr "Стиль"
 
-#: bws-featured-posts.php:254
+#: bws-featured-posts.php:198
 msgid "Use theme styles for Featured Posts block"
 msgstr "Использовать стили темы для блока с избранными постами"
 
-#: bws-featured-posts.php:259
+#: bws-featured-posts.php:203
 msgid "Background Color for block"
 msgstr "Цвет заднего фона для блока"
 
-#: bws-featured-posts.php:265
+#: bws-featured-posts.php:209
 msgid "Background Color for text"
 msgstr "Цвет заднего фона для блока с текстом"
 
-#: bws-featured-posts.php:271
+#: bws-featured-posts.php:215
 msgid "Title Color"
 msgstr "Цвет названия поста"
 
-#: bws-featured-posts.php:277
+#: bws-featured-posts.php:221
 msgid "Text Color"
 msgstr "Цвет текста"
 
-#: bws-featured-posts.php:283
+#: bws-featured-posts.php:227
 msgid "\"Learn more\" Link Color"
 msgstr "Цвет ссылки \"Читать далее\""
 
-#: bws-featured-posts.php:291
+#: bws-featured-posts.php:235
 msgid "Save Changes"
 msgstr "Сохранить изменения"
 
-#: bws-featured-posts.php:298
-msgid "If you enjoy our plugin, please give it 5 stars on WordPress"
-msgstr "Если вам понравился плагин, мы будем благодарны, если вы поставите нам 5 звезд на WordPress"
-
-#: bws-featured-posts.php:299
-msgid "Rate the plugin"
-msgstr "Оценить плагин"
-
-#: bws-featured-posts.php:302
-msgid "If there is something wrong about it, please contact us"
-msgstr "Если у вас есть какие-то вопросы, обращайтесь"
-
-#: bws-featured-posts.php:379
+#: bws-featured-posts.php:315
 msgid "Learn more"
 msgstr "Читать далее"
 
-#: bws-featured-posts.php:402
+#: bws-featured-posts.php:338
 msgid "Featured Post"
 msgstr "Избранный пост"
 
-#: bws-featured-posts.php:427
+#: bws-featured-posts.php:363
 msgid "Display this post in the Featured Post block?"
 msgstr "Отображать данный пост в блоке с избранными постами?"
 
-#: bws-featured-posts.php:538
+#: bws-featured-posts.php:481
 msgid "Support"
 msgstr "Тех. поддержка"
+
+#~ msgid "requires"
+#~ msgstr "требует"
+
+#~ msgid ""
+#~ "or higher, that is why it has been deactivated! Please upgrade WordPress "
+#~ "and try again."
+#~ msgstr ""
+#~ "или выше, поэтому плагин был деактивирован! Пожалуйста обновите WordPress "
+#~ "и попробуйте снова."
+
+#~ msgid "Back to the WordPress"
+#~ msgstr "Вернуться к WordPress"
+
+#~ msgid "Plugins page"
+#~ msgstr "Страница плагинов"
+
+#~ msgid "If you enjoy our plugin, please give it 5 stars on WordPress"
+#~ msgstr ""
+#~ "Если вам понравился плагин, мы будем благодарны, если вы поставите нам 5 "
+#~ "звезд на WordPress"
+
+#~ msgid "Rate the plugin"
+#~ msgstr "Оценить плагин"
+
+#~ msgid "If there is something wrong about it, please contact us"
+#~ msgstr "Если у вас есть какие-то вопросы, обращайтесь"
 
 #~ msgid "Width block"
 #~ msgstr "Ширина блока"

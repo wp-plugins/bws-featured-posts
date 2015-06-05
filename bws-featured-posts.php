@@ -4,7 +4,7 @@ Plugin Name: Featured Posts by BestWebSoft
 Plugin URI: http://bestwebsoft.com/plugin/
 Description: Displays featured posts randomly on any website page.
 Author: BestWebSoft
-Version: 0.3
+Version: 0.4
 Author URI: http://bestwebsoft.com/
 License: GPLv3 or later
 */
@@ -92,7 +92,7 @@ if ( ! function_exists( 'ftrdpsts_settings' ) ) {
 
 		/* Install the option defaults */
 		if ( ! get_option( 'ftrdpsts_options' ) )
-			add_option( 'ftrdpsts_options', $ftrdpsts_option_defaults, '', 'yes' );
+			add_option( 'ftrdpsts_options', $ftrdpsts_option_defaults );
 
 		$ftrdpsts_options = get_option( 'ftrdpsts_options' );
 
@@ -115,11 +115,21 @@ if ( ! function_exists( 'ftrdpsts_settings_page' ) ) {
 		if ( isset( $_POST['ftrdpsts_form_submit'] ) && check_admin_referer( plugin_basename( __FILE__ ), 'ftrdpsts_check_field' ) ) {
 			$ftrdpsts_options['display_before_content'] = ( isset( $_POST['ftrdpsts_display_before_content'] ) ) ? 1 : 0;
 			$ftrdpsts_options['display_after_content'] = ( isset( $_POST['ftrdpsts_display_after_content'] ) ) ? 1 : 0;
-			$ftrdpsts_options['block_width'] = stripslashes( esc_html( $_POST['ftrdpsts_block_width'] ) );
-			$ftrdpsts_options['text_block_width'] = stripslashes( esc_html( $_POST['ftrdpsts_text_block_width'] ) );
+			$block_width = trim( stripslashes( esc_html( $_POST['ftrdpsts_block_width'] ) ) );
+			if ( preg_match( '/^\d{1,4}(px|%)$/', $block_width ) )
+				$ftrdpsts_options['block_width'] = $block_width;
+			else
+				$error = __( "Invalid value for 'Block width'", 'featured_posts' );
+
+			$text_block_width = trim( stripslashes( esc_html( $_POST['ftrdpsts_text_block_width'] ) ) );
+			if ( preg_match( '/^\d{1,4}(px|%)$/', $text_block_width ) )
+				$ftrdpsts_options['text_block_width'] = $text_block_width;
+			else
+				$error = __( "Invalid value for 'Content block width'", 'featured_posts' );
+			
 			$ftrdpsts_options['theme_style'] = ( isset( $_POST['ftrdpsts_theme_style'] ) ) ? 1 : 0;
-			$ftrdpsts_options['background_color_block'] = stripslashes( esc_html(  $_POST['ftrdpsts_background_color_block'] ) );
-			$ftrdpsts_options['background_color_text'] = stripslashes( esc_html(  $_POST['ftrdpsts_background_color_text'] ) );
+			$ftrdpsts_options['background_color_block'] = stripslashes( esc_html( $_POST['ftrdpsts_background_color_block'] ) );
+			$ftrdpsts_options['background_color_text'] = stripslashes( esc_html( $_POST['ftrdpsts_background_color_text'] ) );
 			$ftrdpsts_options['color_text'] = stripslashes( esc_html( $_POST['ftrdpsts_color_text'] ) );
 			$ftrdpsts_options['color_header'] = stripslashes( esc_html( $_POST['ftrdpsts_color_header'] ) );
 			$ftrdpsts_options['color_link'] = stripslashes( esc_html( $_POST['ftrdpsts_color_link'] ) );
@@ -169,14 +179,14 @@ if ( ! function_exists( 'ftrdpsts_settings_page' ) ) {
 						<tr>
 							<th scope="row"><?php _e( 'Block width', 'featured_posts' ); ?></th>
 							<td>
-								<input type="text" class="regular-text" value="<?php echo $ftrdpsts_options['block_width']; ?>" name="ftrdpsts_block_width">
+								<input maxlength="6" type="text" class="regular-text" value="<?php echo $ftrdpsts_options['block_width']; ?>" name="ftrdpsts_block_width">
 								<p class="description"><?php _e( 'Please, enter the value in &#37; or px, for instance, 100&#37; or 960px', 'featured_posts' ); ?></p>
 							</td>
 						</tr>
 						<tr>
 							<th scope="row"><?php _e( 'Content block width', 'featured_posts' ); ?></th>
 							<td>
-								<input type="text" class="regular-text" value="<?php echo $ftrdpsts_options['text_block_width']; ?>" name="ftrdpsts_text_block_width" />
+								<input maxlength="6" type="text" class="regular-text" value="<?php echo $ftrdpsts_options['text_block_width']; ?>" name="ftrdpsts_text_block_width" />
 								<p class="description"><?php _e( 'Please, enter the value in &#37; or px, for instance, 100&#37; or 960px', 'featured_posts' ); ?></p>
 							</td>
 						</tr>
@@ -192,31 +202,31 @@ if ( ! function_exists( 'ftrdpsts_settings_page' ) ) {
 						<tr class="ftrdpsts_theme_style <?php echo $theme_style_class; ?>">
 							<th scope="row"><?php _e( 'Background Color for block', 'featured_posts' ); ?></th>
 							<td>
-								<input type="text" value="<?php echo $ftrdpsts_options['background_color_block']; ?>" name="ftrdpsts_background_color_block" class="wp-color-picker" />
+								<input type="text" value="<?php echo $ftrdpsts_options['background_color_block']; ?>" name="ftrdpsts_background_color_block" maxlength="7" class="wp-color-picker" />
 							</td>
 						</tr>
 						<tr class="ftrdpsts_theme_style <?php echo $theme_style_class; ?>">
 							<th scope="row"><?php _e( 'Background Color for text', 'featured_posts' ); ?></th>
 							<td>
-								<input type="text" value="<?php echo $ftrdpsts_options['background_color_text']; ?>" name="ftrdpsts_background_color_text" class="wp-color-picker" />
+								<input type="text" value="<?php echo $ftrdpsts_options['background_color_text']; ?>" name="ftrdpsts_background_color_text" maxlength="7" class="wp-color-picker" />
 							</td>
 						</tr>
 						<tr class="ftrdpsts_theme_style <?php echo $theme_style_class; ?>">
 							<th scope="row"><?php _e( 'Title Color', 'featured_posts' ); ?></th>
 							<td>
-								<input type="text" value="<?php echo $ftrdpsts_options['color_header']; ?>" name="ftrdpsts_color_header" class="wp-color-picker" />
+								<input type="text" value="<?php echo $ftrdpsts_options['color_header']; ?>" name="ftrdpsts_color_header" maxlength="7" class="wp-color-picker" />
 							</td>
 						</tr>
 						<tr class="ftrdpsts_theme_style <?php echo $theme_style_class; ?>">
 							<th scope="row"><?php _e( 'Text Color', 'featured_posts' ); ?></th>
 							<td>
-								<input type="text" value="<?php echo $ftrdpsts_options['color_text']; ?>"  name="ftrdpsts_color_text" class="wp-color-picker" />
+								<input type="text" value="<?php echo $ftrdpsts_options['color_text']; ?>" name="ftrdpsts_color_text" maxlength="7" class="wp-color-picker" />
 							</td>
 						</tr>
 						<tr class="ftrdpsts_theme_style <?php echo $theme_style_class; ?>">
 							<th scope="row"><?php _e( '"Learn more" Link Color', 'featured_posts' ); ?></th>
 							<td>
-								<input type="text" value="<?php echo $ftrdpsts_options['color_link']; ?>" name="ftrdpsts_color_link" class="wp-color-picker" />
+								<input type="text" value="<?php echo $ftrdpsts_options['color_link']; ?>" name="ftrdpsts_color_link" maxlength="7" class="wp-color-picker" />
 							</td>
 						</tr>
 					</tbody>
@@ -395,10 +405,15 @@ if ( ! function_exists( 'ftrdpsts_wp_head' ) ) {
 		global $ftrdpsts_options;
 		wp_enqueue_style( 'ftrdpsts_stylesheet', plugins_url( 'css/style.css', __FILE__ ) );
 		if ( empty( $ftrdpsts_options ) )
-			$ftrdpsts_options = get_option( 'ftrdpsts_options' );
-
-		if ( $ftrdpsts_options['theme_style'] != 1 ) { ?>
-			<style type="text/css">
+			$ftrdpsts_options = get_option( 'ftrdpsts_options' ); ?>
+		<style type="text/css">
+			#ftrdpsts_heading_featured_post {
+				width: <?php echo $ftrdpsts_options['block_width']; ?>;
+			}
+			#ftrdpsts_heading_featured_post .widget_content {
+				width: <?php echo $ftrdpsts_options['text_block_width']; ?>;
+			}
+			<?php if ( $ftrdpsts_options['theme_style'] != 1 ) { ?>			
 				#ftrdpsts_heading_featured_post {
 					background-color: <?php echo $ftrdpsts_options['background_color_block']; ?> !important;
 				}
@@ -414,11 +429,10 @@ if ( ! function_exists( 'ftrdpsts_wp_head' ) ) {
 				#ftrdpsts_heading_featured_post .widget_content > a {
 					color: <?php echo $ftrdpsts_options['color_link']; ?> !important;
 				}
-			</style>
-		<?php }
-	}
+			<?php } ?>
+		</style>
+	<?php }
 }
-
 
 /**
 * Add style for admin page
@@ -427,7 +441,7 @@ if ( ! function_exists( 'ftrdpsts_admin_head' ) ) {
 	function ftrdpsts_admin_head() {		
 		if ( isset( $_REQUEST['page'] ) && 'featured-posts.php' == $_REQUEST['page'] ) {
 			wp_enqueue_style( 'ftrdpsts_stylesheet', plugins_url( 'css/style.css', __FILE__ ) );
-			wp_enqueue_style( 'wp-color-picker' );          
+			wp_enqueue_style( 'wp-color-picker' );
 			wp_enqueue_script( 'wp-color-picker' ); 
 			wp_enqueue_script( 'ftrdpsts_script', plugins_url( '/js/script.js', __FILE__ ) , array( 'jquery' ) );
 		}
@@ -488,7 +502,7 @@ add_action( 'init', 'ftrdpsts_init' );
 /* Plugin initialization for admin page */
 add_action( 'admin_init', 'ftrdpsts_admin_init' );
 
-/*  Adds a box to the main column on the Post and Page edit screens. */
+/* Adds a box to the main column on the Post and Page edit screens. */
 add_action( 'add_meta_boxes', 'ftrdpsts_featured_posts_add_custom_box' );
 
 /* When the post is saved, saves our custom data. */

@@ -1,10 +1,10 @@
 === Featured Posts by BestWebSoft ===
 Contributors: bestwebsoft
-Donate link: https://www.2checkout.com/checkout/purchase?sid=1430388&quantity=1&product_id=94
+Donate link: http://bestwebsoft.com/donate/
 Tags: plugin, wordpress, featured, random posts, featured posts, add featured posts, display featured posts, manage featured posts, featured posts plugin, mark post as featured, mark page as featured, featured posts block, fetured post, faetured post, featyred post, feachured post, featured psot, featured post with theme, feetured posts, featered post. 
 Requires at least: 3.5
-Tested up to: 4.2.1
-Stable tag: 0.3
+Tested up to: 4.2.2
+Stable tag: 0.4
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -20,6 +20,7 @@ Featured Posts by BestWebSoft plugin allows you to add and manage featured posts
 http://www.youtube.com/watch?v=7Z5d1qZpwrM
 
 <a href="http://wordpress.org/plugins/bws-featured-posts/faq/" target="_blank">FAQ</a>
+
 <a href="http://support.bestwebsoft.com" target="_blank">Support</a>
 
 = Features =
@@ -65,13 +66,11 @@ We can fix some things for free for the users who provide a translation of our p
 = How can I add a Featured Post to my website? =
 
 1. If you would like to add Featured Posts to your page or post, select the posts to be displayed (on the page/post editing page, in Featured Post block, please mark 'Display this post in the Featured Post block?').
-2. There are several ways to add the block: 
-1) You can enable block display Before the Post and/or After the Post on the plugin settings page. 
-2) You can copy and paste this shortcode into your post or page: [bws_featured_post]
-3) You can copy and paste this code to the necessary place in your theme 
-&lt;?php if( has_action( 'rndmftrdpsts_featured_posts' ) ) {
-	do_action( 'rndmftrdpsts_featured_posts' );
-} ?&gt;
+2. There are several ways to add the block:
+
+- You can enable block display Before the Post and/or After the Post on the plugin settings page. 
+- You can copy and paste this shortcode into your post or page: [bws_featured_post]
+- You can copy and paste this code to the necessary place in your theme `<?php if ( has_action( 'rndmftrdpsts_featured_posts' ) ) { do_action( rndmftrdpsts_featured_posts' ); } ?>`
 
 = I have installed the plugin and went through the abovementioned steps to add a block, yet the block is not displayed =
 
@@ -85,6 +84,7 @@ Also, you can select the width of the entire block and the text block.
 = I have some problems with the plugin's work. What Information should I provide to receive proper support? =
 
 Please make sure that the problem hasn't been discussed on our forum yet (<a href="http://support.bestwebsoft.com" target="_blank">http://support.bestwebsoft.com</a>). If not, please provide the following data along with your problem's description:
+
 1. the link to the page, on which the problem occurs
 2. the plugin’s name and version. If you are using a pro version - your order number.
 3. the version of your WordPress installation
@@ -99,6 +99,11 @@ Please make sure that the problem hasn't been discussed on our forum yet (<a hre
 
 == Changelog == 
 
+= V0.4 - 05.06.2015 =
+* Update : Input maxlength and input validation is added.
+* Bugfix : We fixed block width settings.
+* Update : We updated all functionality for wordpress 4.2.2.
+
 = V0.3 - 29.04.2015 =
 * Update : We updated all functionality for wordpress 4.2.1.
 
@@ -110,6 +115,9 @@ Please make sure that the problem hasn't been discussed on our forum yet (<a hre
 * NEW : Css-style was added.
 
 == Upgrade Notice ==
+
+= V0.4 =
+Input maxlength and input validation is added. We fixed block width settings. We updated all functionality for wordpress 4.2.2. BWS plugins section was updated.
 
 = V0.3 =
 We updated all functionality for wordpress 4.2.1.
